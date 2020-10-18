@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <title>Simple CRUD - 181524031 Zara Veda Mahendra</title>
+        <style>
+            * {
+                text-align: center;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <h1>
+            Simple CRUD - Article
+        </h1>
+        <div id="content">
+            <table style="border: 1px solid black; margin-left:auto; margin-right: auto;">
+                <tr>
+                    <th>Title</th>
+                    <th>Content</th>
+                </tr>
+                <tr v-for="article in articles">
+                    <td>{{ article.title }}</td>
+                    <td>{{ article.content }}</td>
+                    <td><button v-on:click="deleteArticle(article.id)">Delete</button></td>
+                    <td><button v-on:click="showEditForm">Edit</button></td>
+                </tr>
+            </table>
+
+            <button v-on:click="showNewForm">New</button>
+
+            <form v-show="seen && add">
+                <label for="title">Title</label><br>
+                <input id="title" v-model="titleVal" placeholder="New Title"><br>
+                <label for="content">Content</label><br>
+                <input id="content" v-model="contentVal" placeholder="New Content">
+                <button v-on:click="createArticle(titleVal, contentVal)">Add</button>
+            </form>
+
+            <form v-if="seen && edit">
+                <label for="title">Title</label><br>
+                <input id="title" v-model="titleVal"><br>
+                <label for="content">Content</label><br>
+                <input id="content" v-model="contentVal">
+                <button v-on:click="updateArticle(titleVal, contentVal)">Update</button>
+            </form>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script type="module" src="script/index.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </body>
+</html>
