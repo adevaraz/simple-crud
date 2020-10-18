@@ -7,6 +7,7 @@ const app = new Vue({
         seen: false,
         add: false,
         edit: false,
+        idVal: -1,
         titleVal: "",
         contentVal: ""
     },
@@ -18,7 +19,6 @@ const app = new Vue({
         },
 
         createArticle: function (newTitle, newContent) {
-            console.log(newTitle);
             axios.post('/article', {title: newTitle, content: newContent}).then(() => {
                 this.readAll();
                 this.seen = false;
@@ -34,16 +34,13 @@ const app = new Vue({
             })
         },
 
-        editArticle: function (article) {
-            this.titleVal = article.title;
-            this.contentVal = article.content;
-        },
-
         updateArticle:function (id, newTitle, newContent) {
+            console.log(id);
             axios.put(`/article/${id}`, {title: newTitle, content: newContent}).then(() => {
                 this.readAll();
                 this.seen = false;
                 this.edit = false;
+                this.idVal = -1;
                 this.titleVal = "";
                 this.contentVal = "";
             });
@@ -52,17 +49,15 @@ const app = new Vue({
         showNewForm: function () {
             this.seen = true;
             this.add = true;
-
-            console.log(this.seen + this.add);
         },
 
-        showEditForm: function () {
+        showEditForm: function (article) {
             this.seen = true;
             this.edit = true;
 
-            this.titleVal = "";
-            this.contentVal = "";
-            console.log(this.seen + this.edit);
+            this.idVal = article.id;
+            this.titleVal = article.title;
+            this.contentVal = article.content;
         }
     },
     created: function () {

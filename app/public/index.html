@@ -28,7 +28,7 @@
                     <td>{{ article.title }}</td>
                     <td>{{ article.content }}</td>
                     <td><button v-on:click="deleteArticle(article.id)">Delete</button></td>
-                    <td><button v-on:click="showEditForm">Edit</button></td>
+                    <td><button v-on:click="showEditForm(article)">Edit</button></td>
                 </tr>
             </table>
 
@@ -47,7 +47,7 @@
                 <input id="title" v-model="titleVal"><br>
                 <label for="content">Content</label><br>
                 <input id="content" v-model="contentVal">
-                <button v-on:click="updateArticle(titleVal, contentVal)">Update</button>
+                <button v-on:click="updateArticle(idVal, titleVal, contentVal)">Update</button>
             </form>
         </div>
 
